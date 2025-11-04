@@ -11,8 +11,6 @@ Incluye API REST para consumo externo y scripts SQL con triggers y funciones de 
 
 ## Requisitos previos
 
-Asegúrate de tener instalados:
-
 | Herramienta | Versión recomendada | Comando para verificar |
 |--------------|---------------------|-------------------------|
 | Java JDK     | 11 / 17 / 21        | `java -version`         |
@@ -20,13 +18,13 @@ Asegúrate de tener instalados:
 | PostgreSQL   | ≥ 14.x              | `psql --version`        |
 
 
-> El proyecto fue probado con OpenXava **7.5.3** y Java **17**.
+> El proyecto fue probado con OpenXava **7.5.3**, Java **17** y Postgres**18**.
 
 ---
 
 ## Estructura del proyecto
     ```bash
-    openxava-app/
+    SistemaFidelizacionClientes/
     ├── pom.xml # Configuración Maven + dependencias OpenXava
     ├── src/
     │ ├── main/
@@ -36,16 +34,17 @@ Asegúrate de tener instalados:
     │ └── test/ # pruebas unitarias
     ├── db/
     │ ├── migration/ # scripts SQL de creación de tablas (DDL)
-    │ └── seed/ # datos de ejemplo (opcional)
+    │ └── seed/ # datos de ejemplo
     ├── .gitignore
+    ├── LICENSE
+    ├── SIFI Puntos API.postman_collection.json
     └── README.md
 
 ---
 
 ## Configuración de base de datos
 
-El archivo `src/main/resources/META-INF/persistence.xml` define la conexión a PostgreSQL.  
-Utiliza **placeholders** para evitar subir credenciales reales:
+El archivo `src/main/resources/META-INF/persistence.xml` define la conexión a PostgreSQL. Modificar segun corresponda.
 
     ```xml
 	<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/sifidb"/>
@@ -61,10 +60,19 @@ Utiliza **placeholders** para evitar subir credenciales reales:
 
 ---
 
-2. Compilar y ejecutar con Maven:
-   ```bash
-	mvn clean package
-	mvn openxava:run
+2. Compilar y ejecutar con Openxava:
+
+	2.1. Descargar openxava de la pagina oficial https://openxava.org/
+	2.2. Instalar el openxava
+	2.3. Buscar la carpeta del repositorio descargado
+	2.4. Antes de ejecutar el projecto tener creado una base de datos sifidb, modificar el archivo persistence.xml segun se indica arriba.
+	2.5. Una vez hecho eso, abrir el proyecto, se tendrá que ver una ventana al costado izquierdo con la siguiente estructura:
+	SistemaFidelizacionClientes/
+  **├── src/main/java**
+    ├── src/main/resources
+    2.6. Click derecho encima de src/main/java --> "Run As.." --> Maven Install
+	2.7. Click derecho encima de src/main/java --> "Run As.." --> Java Application
+	2.8 Se realiza la compilación y ejecución del servicio REST+Frontend.
 ---
 
 Abre tu navegador en
